@@ -1,0 +1,19 @@
+# Backup files
+*~
+*#
+*.#
+
+# Dev tools
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+.dir-locals.el
+
+# Build dirs
+build/
+_build/
+_build*/
+
+# Docs dir
+docs/

@@ -1,0 +1,30 @@
+#+TITLE: ARM ComputeLibrary CMake MWE
+#+BEGIN_QUOTE
+A minimum working example (MWE) of linking [[https://github.com/ARM-software/ComputeLibrary][ARM ComputeLibrary]] to a CMake based project.
+#+END_QUOTE
+
+** Context
+As an intermediate C++ programmer, it had taken me a while to start using the CMake build system in projects.
+
+I have found the learning curve as to how to linking libraries to be quite steep.  However, I finally got it working for ARM ComputeLibrary, and have made this repo to help others, and elicit feedback for best practices.
+
+** Building
+I build ARMCL from source, and placed it in the directory ~\~/tools/arm/ComputeLibrary~.  
+
+Instead of figuring out the appropriate symbolic links to make to the include directories, and libraries, I instead made an environment variable of the path ~export ARMCL_DIR="\~/tools/arm/ComputeLibrary/"~.  If you have any advice to improve this, please leave it as an issue.
+
+With ARMCL built, one can then run:
+
+#+BEGIN_SRC sh
+mkdir _build
+cd _build
+cmake .. 
+make 
+./src/armcl_mwe
+#+END_SRC
+
+The root level CMake script loads the module ~FindARMCL~, which finds the appropriate paths of the library and its includes.  These are added to the lists ~MWE_INCLUDE_DIRS~ and ~MWE_LINKER_LIBS~.
+
+Inside the ~src~ directory, our CMake script downloads the Google Test library, and builds the program, linking to the specified libraries.
+
+The program runs sgemm using the OpenCL part of ARM ComputeLibrary.
